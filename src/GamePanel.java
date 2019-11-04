@@ -34,6 +34,7 @@ public class GamePanel extends JPanel implements ActionListener , KeyListener {
     objectManager objManager = new objectManager(rocket);
     
     Timer frameDraw;
+    Timer alienSpawn;
     
     GamePanel(){
         titleFont = new Font("Arial", Font.PLAIN, 48);
@@ -45,6 +46,8 @@ public class GamePanel extends JPanel implements ActionListener , KeyListener {
 		    loadImage ("space.png");
 		}
     }
+    
+    
 	void loadImage(String imageFile) {
 	    if (needImage) {
 	        try {
@@ -57,6 +60,13 @@ public class GamePanel extends JPanel implements ActionListener , KeyListener {
 	    }
 	}
 
+	
+	
+	
+	void startGame(){
+	    alienSpawn = new Timer(2000 , objManager);
+	    alienSpawn.start();
+	}
     
 	@Override
 	public void paintComponent(Graphics g){
@@ -150,9 +160,15 @@ public class GamePanel extends JPanel implements ActionListener , KeyListener {
 		    if (currentState == END) {
 		        currentState = MENU;
 		    } else {
+		    	if(currentState == MENU) startGame();
 		        currentState++;
 		    }
 		}   
+		if(e.getKeyCode()==KeyEvent.VK_SPACE && currentState == GAME) {
+			objectManager.addProjectile(rocket.getProjectile()); //Made thing static may need to remove that
+			System.out.println("Shoot");
+		}
+		
 		if (e.getKeyCode()==KeyEvent.VK_UP) {
 		    System.out.println("UP");
 		    rocket.up();

@@ -9,7 +9,8 @@ public class Rocketship extends GameObject{
 	public static BufferedImage image;
 	public static boolean needImage = true;
 	public static boolean gotImage = false;	
-	
+	Rocketship rocket;
+
 	Rocketship(int x, int y, int width, int height){
 		super(x,y,width,height);	
 		if (needImage) {
@@ -50,4 +51,9 @@ public class Rocketship extends GameObject{
     public void right() {
         x+=speed;
     }
+
+
+	public projectile getProjectile() {
+        return new projectile(rocket.x+(rocket.width/2), rocket.y, 10, 10);
+	}	 
 }

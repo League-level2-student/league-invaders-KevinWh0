@@ -13,7 +13,7 @@ public class alien extends GameObject {
 	alien(int x, int y, int width, int height) {
 		super(x,y,width,height);	
 		if (needImage) {
-		    loadImage ("rocket.png");
+		    loadImage ("alien.png");
 		}
 	}
 	void loadImage(String imageFile) {

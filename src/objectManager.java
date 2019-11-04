@@ -6,21 +6,20 @@ import java.util.Random;
 
 public class objectManager implements ActionListener {
 	Rocketship rocket;
-	ArrayList<projectile> projectiles = new ArrayList<projectile>();
+	static ArrayList<projectile> projectiles = new ArrayList<projectile>();
 	ArrayList<alien> aliens = new ArrayList<alien>();
 	
 	objectManager(Rocketship rocket){
 		this.rocket = rocket;
 		//addAlien();
-		for (int i = 0; i < 5; i++) {
-			addAlien();
-		}
-	
 	}
 	
-	void addProjectile(projectile p) {
+	static void addProjectile(projectile p) {
 		projectiles.add(p);
 	}
+	public projectile getProjectile() {
+        return new projectile(rocket.x+(rocket.width/2), rocket.y, 10, 10);
+	}	 
 	void addAlien() {
 		Random random = new Random();
 		
@@ -34,6 +33,7 @@ public class objectManager implements ActionListener {
 				aliens.get(i).isActive = false;
 			}
 		}
+		
 	}
 	
 	void draw(Graphics g) {
@@ -63,6 +63,6 @@ public class objectManager implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		
-
+		addAlien();
 	}
 }
