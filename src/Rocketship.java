@@ -54,7 +54,8 @@ public class Rocketship extends GameObject{
 
 
 	public projectile getProjectile() {
+		int ProjectileSize = 20;
 		//System.out.println("s "+new projectile(rocket.x+(rocket.width/2), rocket.y, 100, 100));
-        return new projectile(rocket.x+(rocket.width/2), rocket.y, 100, 100);
+        return new projectile((x+(width/2))-ProjectileSize/2, y, ProjectileSize, ProjectileSize);
 	}	 
 }

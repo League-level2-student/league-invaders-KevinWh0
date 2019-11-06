@@ -1,3 +1,4 @@
+import java.awt.Color;
 
 public class GameObject {
 	 int x;
@@ -14,11 +15,11 @@ public class GameObject {
 		 
 		 
 		 isActive = true;
-		 speed = 1;
+		 speed = 100;
 	}
 	
 	void update() {
-		
+
 		
 	}
 }

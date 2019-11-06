@@ -120,7 +120,7 @@ public class GamePanel extends JPanel implements ActionListener , KeyListener {
 		 g.setColor(Color.YELLOW);
 		 g.drawString("League Invaders", 80, 80);
 		 
-		 g.drawString("You Done Died", 20, LeagueInvaders.HEIGHT/2);
+		 g.drawString("You Died", 20, LeagueInvaders.HEIGHT/2);
 		 
 		 g.setFont(captionFont);
 		 g.drawString("Press SPACE for life", 60, LeagueInvaders.HEIGHT-80);

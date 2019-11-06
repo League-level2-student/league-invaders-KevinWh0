@@ -33,6 +33,7 @@ public class projectile extends GameObject {
 		y-=speed;
 	}
 	void draw(Graphics g) {
+		update();
 		if (gotImage) {
 			g.drawImage(image, x, y, width, height, null);
 		} else {
