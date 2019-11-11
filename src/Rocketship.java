@@ -10,7 +10,7 @@ public class Rocketship extends GameObject{
 	public static boolean needImage = true;
 	public static boolean gotImage = false;	
 	Rocketship rocket;
-
+	int Rspeed = 10;
 	Rocketship(int x, int y, int width, int height){
 		super(x,y,width,height);	
 		if (needImage) {
@@ -30,8 +30,12 @@ public class Rocketship extends GameObject{
 	        needImage = false;
 	    }
 	}
-	
+	void update() {
+		super.update();
+	}
 	void draw(Graphics g) {
+		update();
+		//System.err.println(x);
 		if (gotImage) {
 			g.drawImage(image, x, y, width, height, null);
 		} else {
@@ -39,17 +43,18 @@ public class Rocketship extends GameObject{
 			g.fillRect(x, y, width, height);
 		}
 	}
+	
     public void up() {
-        y-=speed;
+        y-=speed*Rspeed;
     }
     public void down() {
-        y+=speed;
+        y+=speed*Rspeed;
     }
     public void left() {
-        x-=speed;
+        x-=speed*Rspeed;
     }
     public void right() {
-        x+=speed;
+        x+=speed*Rspeed;
     }
 
 

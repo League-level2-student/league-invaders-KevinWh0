@@ -8,10 +8,15 @@ public class objectManager implements ActionListener {
 	Rocketship rocket;
 	static ArrayList<projectile> projectiles = new ArrayList<projectile>();
 	ArrayList<alien> aliens = new ArrayList<alien>();
+	int score = 0;
 	
 	objectManager(Rocketship rocket){
 		this.rocket = rocket;
 		//addAlien();
+	}
+	
+	int getScore() {
+		return score;
 	}
 	
 	static void addProjectile(projectile p) {
@@ -26,7 +31,36 @@ public class objectManager implements ActionListener {
 		aliens.add(new alien(random.nextInt(LeagueInvaders.WIDTH),0,50,50));
 	}	
 	
+	void checkCollision() {
+		for (int i = 0; i < aliens.size(); i++) {
+			for (int j = 0; j < projectiles.size(); j++) {
+				if(aliens.get(i).collisionBox.intersects(projectiles.get(j).collisionBox)){
+					aliens.get(i).isActive = false;
+					score++;
+					System.err.println(aliens.size());
+				}
+			}
+
+		}
+		
+		for (int i = 0; i < aliens.size(); i++) {
+			if(rocket.collisionBox.intersects(aliens.get(i).collisionBox)){
+				rocket.isActive = false;
+				currentState = END;
+				aliens.get(i).isActive = false;
+				System.err.println("EEEEEEEEEEEEEEEEEEEE");
+				
+				
+			}
+
+		}		
+		
+	}
+	
 	void update() {
+		checkCollision();
+		purgeObjects();
+
 		for (int i = 0; i < aliens.size(); i++) {
 			aliens.get(i).update();
 			if(aliens.get(i).y > LeagueInvaders.HEIGHT) {

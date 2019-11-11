@@ -30,6 +30,7 @@ public class alien extends GameObject {
 	
 	void update() {
 		y+=speed;
+		super.update();
 	}
 	void draw(Graphics g) {
 		if (gotImage) {
