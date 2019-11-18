@@ -46,9 +46,11 @@ public class objectManager implements ActionListener {
 		for (int i = 0; i < aliens.size(); i++) {
 			if(rocket.collisionBox.intersects(aliens.get(i).collisionBox)){
 				rocket.isActive = false;
-				currentState = END;
+				
+				
+				GamePanel.currentState = GamePanel.END;
 				aliens.get(i).isActive = false;
-				System.err.println("EEEEEEEEEEEEEEEEEEEE");
+				//System.err.println("EEEEEEEEEEEEEEEEEEEE");
 				
 				
 			}

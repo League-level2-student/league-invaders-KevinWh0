@@ -21,11 +21,12 @@ public class GamePanel extends JPanel implements ActionListener , KeyListener {
 	public static boolean gotImage = false;
 	
 	
-    final int MENU = 0;
-    final int GAME = 1;
-    public final int END = 2;
+    final static int MENU = 0;
+    final static int GAME = 1;
+    public static final int END = 2;
+    final static int INSTRUCTIONS = 3;
     
-    public int currentState = MENU;
+    public static int currentState = MENU;
     
     Font titleFont;
     Font captionFont;
@@ -76,6 +77,8 @@ public class GamePanel extends JPanel implements ActionListener , KeyListener {
 		    drawGameState(g);
 		}else if(currentState == END){
 		    drawEndState(g);
+		}else if(currentState == INSTRUCTIONS){
+		    drawInstructions(g);
 		}
 
 	}
@@ -131,11 +134,36 @@ public class GamePanel extends JPanel implements ActionListener , KeyListener {
 		 g.drawString("You Died", 20, LeagueInvaders.HEIGHT/2);
 		 
 		 g.setFont(captionFont);
-		 g.drawString("Press SPACE for life", 60, LeagueInvaders.HEIGHT-80);
+		 g.drawString("Press ENTER to play again", 60, LeagueInvaders.HEIGHT-80);
 		 
 		 
 		 
 	 }
+	 int insScrollX = 110;
+	 int ScrollVel = -1;
+	 String insText = "Arrow keys to move, and space to shoot      Press ENTER to return to the menu         Life insurance not included";
+	 void drawInstructions(Graphics g)  { 
+		 g.setColor(Color.BLUE);
+		 g.fillRect(0, 0, LeagueInvaders.WIDTH, LeagueInvaders.HEIGHT);
+		 g.setFont(titleFont);
+		 g.setColor(Color.YELLOW);
+		 g.drawString("League Invaders", 80, 80);
+		 
+		 g.drawString("HOW TO PLAY:", 20, LeagueInvaders.HEIGHT/2);
+		 
+		 g.setFont(captionFont);
+		 g.drawString(insText, insScrollX, LeagueInvaders.HEIGHT-300);
+		 //g.drawString("and space to shoot", 60, LeagueInvaders.HEIGHT-300);
+		 insScrollX+=ScrollVel;
+		 if(insScrollX < -insText.length()*9) {
+			 //insScrollX = 0
+			 ScrollVel = 1;
+		 }else if(insScrollX > 50) {
+			 ScrollVel = -1;
+		 }
+		 
+	 }
+	 
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -165,7 +193,7 @@ public class GamePanel extends JPanel implements ActionListener , KeyListener {
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
 		if (e.getKeyCode()==KeyEvent.VK_ENTER) {
-		    if (currentState == END) {
+		    if (currentState > END-1) {
 		        rocket = new Rocketship(250, 700, 50, 50);
 		    	objManager = new objectManager(rocket);
 
@@ -180,6 +208,10 @@ public class GamePanel extends JPanel implements ActionListener , KeyListener {
 		        currentState++;
 		    }
 		}   
+		if(e.getKeyCode()==KeyEvent.VK_SPACE && currentState == MENU) {
+			//drawInstructions(e);
+			currentState = INSTRUCTIONS;
+		}
 		if(e.getKeyCode()==KeyEvent.VK_SPACE && currentState == GAME) {
 			objectManager.addProjectile(rocket.getProjectile()); //Made thing static may need to remove that
 			//objectManager.addProjectile(new projectile(10, 10, 100, 100));		
@@ -202,6 +234,7 @@ public class GamePanel extends JPanel implements ActionListener , KeyListener {
 		    System.out.println("RIGHT");
 		    rocket.right();
 		}
+		
 	}
 
 

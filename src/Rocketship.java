@@ -29,6 +29,9 @@ public class Rocketship extends GameObject{
 	        }
 	        needImage = false;
 	    }
+	    
+
+	    
 	}
 	void update() {
 		super.update();
